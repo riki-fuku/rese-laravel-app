@@ -31,7 +31,7 @@ class Shop extends Model
 
     public function favorite()
     {
-        return $this->belongsTo('App\Models\Favorite', 'id', 'shop_id')->where('user_id', auth()->id());
+        return $this->belongsTo('App\Models\Favorite', 'id', 'shop_id')->where('user_id', 1); // TODO::user_idは仮
     }
 
     public function favoriteOnly()
