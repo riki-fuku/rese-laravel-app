@@ -13,4 +13,10 @@ class ShopController extends Controller
         $shops = Shop::with('genre', 'area', 'favorite')->get();
         return response()->json($shops);
     }
+
+    public function show($id)
+    {
+        $shop = Shop::with('genre', 'area', 'favorite')->find($id);
+        return response()->json($shop);
+    }
 }
