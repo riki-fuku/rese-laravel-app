@@ -44,12 +44,15 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::with(['shop' => function ($query) {
             $query->with('area', 'genre');
-        }])
+        }, 'user'])
             ->find($reservationId);
 
         if (!$reservation) {
             return response()->json(['message' => '予約が見つかりません'], 404);
         }
+
+        // statusを元にReservation::STATUSのlabelの値を取得してstatus_nameという項目に格納
+        $reservation->status_name = Reservation::STATUS[$reservation->status]['label'];
 
         return response()->json($reservation);
     }
@@ -129,6 +132,19 @@ class ReservationController extends Controller
             return response()->json(['message' => '予約キャンセルに失敗しました'], 500);
         }
 
+        return response()->json($reservation);
+    }
+
+    /**
+     * 予約ステータスを来店済に更新
+     */
+    public function visited(Request $request)
+    {
+        $id = $request->reservation_id;
+        $reservation = Reservation::find($id);
+        // statusを来店済(2)に変更
+        $reservation->status = Reservation::VISITED;
+        $reservation->save();
         return response()->json($reservation);
     }
 }

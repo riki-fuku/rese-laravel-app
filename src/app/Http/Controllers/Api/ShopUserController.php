@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ShopUser;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ShopUserController extends Controller
@@ -93,5 +94,41 @@ class ShopUserController extends Controller
         $shopUser->save();
 
         return response()->json($shopUser);
+    }
+
+    public function showShop()
+    {
+        // ログイン中の店舗代表者のIDを取得
+        $shopUserid = 1;
+
+        $shopUser = ShopUser::with(['shop' => function ($query) {
+            $query->with('area', 'genre');
+        }])
+            ->find($shopUserid);
+
+        return response()->json($shopUser->shop);
+    }
+
+    public function showReservations()
+    {
+        // ログイン中の店舗代表者のIDを取得
+        $shopUserid = 1;
+
+        $shopUser = ShopUser::with(['shop' => function ($query) {
+            $query->with(['reservations' => function ($query) {
+                $query->orderBy('status', 'asc');
+                $query->orderBy('reservation_date', 'asc');
+                $query->orderBy('reservation_time', 'asc');
+                $query->with('user');
+            }]);
+        }])
+            ->find($shopUserid);
+
+        // statusを元にReservation::STATUSのlabelの値を取得してstatus_nameという項目に格納
+        $shopUser->shop->reservations->map(function ($reservation) {
+            $reservation->status_name = Reservation::STATUS[$reservation->status]['label'];
+        });
+
+        return response()->json($shopUser->shop->reservations);
     }
 }

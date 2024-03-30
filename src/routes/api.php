@@ -27,6 +27,12 @@ Route::get('/shops', 'App\Http\Controllers\Api\ShopController@index');
 // 店舗詳細取得
 Route::get('/shops/{id}', 'App\Http\Controllers\Api\ShopController@show');
 
+// 店舗登録
+Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store')->name('shop.store');
+
+// 店舗更新
+Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update')->name('shop.update');
+
 /**
  * ジャンル
  */
@@ -66,6 +72,9 @@ Route::put('/reservation', 'App\Http\Controllers\Api\ReservationController@updat
 // 予約キャンセル
 Route::delete('/reservation/cancel/{id}', 'App\Http\Controllers\Api\ReservationController@cancel');
 
+// 予約ステータスを来店済に更新
+Route::post('/reservation/visited', 'App\Http\Controllers\Api\ReservationController@visited')->name('reservation.visited');
+
 /**
  * 店舗評価
  */
@@ -84,14 +93,16 @@ Route::post('/payment', 'App\Http\Controllers\Api\PaymentController@charge');
 // 店舗代表者一覧取得
 Route::get('/shop_users', 'App\Http\Controllers\Api\ShopUserController@index')->name('shop_user.index');
 
-// 店舗代表者詳細取得
-Route::get('/shop_user/show/{id}', 'App\Http\Controllers\Api\ShopUserController@show')->name('shop_user.show');
+// 店舗代表者に紐づく店舗取得
+Route::get('/shop_user/show/shop', 'App\Http\Controllers\Api\ShopUserController@showShop')->name('shop_user.show_shop');
+
+// 店舗代表者に紐づく予約一覧取得
 
 // 店舗代表者作成
-Route::post('/shop_user/store', 'App\Http\Controllers\Api\ShopUserController@store')->name('shop_user.store');
+Route::get('/shop_user/show/reservations', 'App\Http\Controllers\Api\ShopUserController@showReservations')->name('shop_user.show_reservations');
 
 // 店舗代表者更新
-Route::post('/shop_user/update', 'App\Http\Controllers\Api\ShopUserController@update')->name('shop_user.update');
+Route::get('/shop_user/update', 'App\Http\Controllers\Api\ShopUserController@update')->name('shop_user.update');
 
 // 店舗代表者有効/無効切り替え
 Route::post('/shop_user/change_invalid', 'App\Http\Controllers\Api\ShopUserController@changeInvalid')->name('shop_user.change_invalid');
