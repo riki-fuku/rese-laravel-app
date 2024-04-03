@@ -21,7 +21,7 @@ class CreateEmailSendHistoriesTable extends Migration
             $table->timestamp('sent_datetime')->comment('送信日時');
             $table->tinyInteger('success_flag')->comment('送信成功フラグ(0:失敗,1:成功)');
             $table->text('error_message')->nullable()->comment('エラーメッセージ');
-            $table->string('user_type', 10)->comment('ユーザー区分(1:管理者、2:店舗代表者,3:リマインドメール)');
+            $table->string('user_type', 10)->comment('ユーザー区分(1:管理者、2:店舗代表者)');
             $table->timestamps();
         });
     }

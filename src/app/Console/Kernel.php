@@ -15,7 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // 毎分リマインドメール送信
+        // $schedule->command('command:sendRemindEmails')->everyMinute();
+        // 毎朝8時にリマインドメールを送信
+        $schedule->command('command:sendRemindEmails')->dailyAt('8:00');
     }
 
     /**
@@ -25,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

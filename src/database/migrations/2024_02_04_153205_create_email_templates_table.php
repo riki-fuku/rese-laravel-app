@@ -18,7 +18,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->string('name')->comment('メールテンプレート名');
             $table->string('subject')->comment('件名');
             $table->text('body')->comment('本文');
-            $table->string('user_type', 10)->comment('ユーザー区分(1:管理者、2:店舗代表者、3:リマインドメール');
+            $table->string('user_type', 10)->comment('ユーザー区分(1:管理者、2:店舗代表者');
             $table->timestamps();
         });
     }

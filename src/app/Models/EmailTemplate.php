@@ -11,7 +11,6 @@ class EmailTemplate extends Model
 
     const ADMIN_USER = 1; // 管理者
     const AGENT_USER = 2; // 店舗代表者
-    const REMIND_MAIL = 3; // リマインドメール
 
     protected $fillable = [
         'name',
