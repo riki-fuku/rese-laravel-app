@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 /**
  * 店舗
  */
@@ -25,13 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/shops', 'App\Http\Controllers\Api\ShopController@index');
 
 // 店舗詳細取得
-Route::get('/shops/{id}', 'App\Http\Controllers\Api\ShopController@show');
+Route::get('/shops/{shopId}', 'App\Http\Controllers\Api\ShopController@show');
 
 // 店舗登録
-Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store')->name('shop.store');
+Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store');
 
 // 店舗更新
-Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update')->name('shop.update');
+Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update');
 
 /**
  * ジャンル
@@ -64,7 +59,7 @@ Route::get('/reservations/{userId}', 'App\Http\Controllers\Api\ReservationContro
 Route::post('/reservation', 'App\Http\Controllers\Api\ReservationController@store');
 
 // 予約詳細取得
-Route::get('/reservation/{id}', 'App\Http\Controllers\Api\ReservationController@show');
+Route::get('/reservation/{reservationId}', 'App\Http\Controllers\Api\ReservationController@show');
 
 // 予約更新
 Route::put('/reservation', 'App\Http\Controllers\Api\ReservationController@update');
@@ -73,7 +68,7 @@ Route::put('/reservation', 'App\Http\Controllers\Api\ReservationController@updat
 Route::delete('/reservation/cancel/{id}', 'App\Http\Controllers\Api\ReservationController@cancel');
 
 // 予約ステータスを来店済に更新
-Route::post('/reservation/visited', 'App\Http\Controllers\Api\ReservationController@visited')->name('reservation.visited');
+Route::post('/reservation/visited', 'App\Http\Controllers\Api\ReservationController@visited');
 
 /**
  * 店舗評価
@@ -91,30 +86,31 @@ Route::post('/payment', 'App\Http\Controllers\Api\PaymentController@charge');
  * 店舗代表者
  */
 // 店舗代表者一覧取得
-Route::get('/shop_users', 'App\Http\Controllers\Api\ShopUserController@index')->name('shop_user.index');
+Route::get('/shop_users', 'App\Http\Controllers\Api\ShopUserController@index');
 
 // 店舗代表者に紐づく店舗取得
-Route::get('/shop_user/show/shop', 'App\Http\Controllers\Api\ShopUserController@showShop')->name('shop_user.show_shop');
+Route::get('/shop_user/show/shop', 'App\Http\Controllers\Api\ShopUserController@showShop');
 
 // 店舗代表者に紐づく予約一覧取得
+Route::get('/shop_user/show/reservations', 'App\Http\Controllers\Api\ShopUserController@showReservations');
 
 // 店舗代表者作成
-Route::get('/shop_user/show/reservations', 'App\Http\Controllers\Api\ShopUserController@showReservations')->name('shop_user.show_reservations');
+Route::post('/shop_user/store', 'App\Http\Controllers\Api\ShopUserController@store');
 
 // 店舗代表者更新
-Route::get('/shop_user/update', 'App\Http\Controllers\Api\ShopUserController@update')->name('shop_user.update');
+Route::put('/shop_user/update', 'App\Http\Controllers\Api\ShopUserController@update');
 
 // 店舗代表者有効/無効切り替え
-Route::post('/shop_user/change_invalid', 'App\Http\Controllers\Api\ShopUserController@changeInvalid')->name('shop_user.change_invalid');
+Route::post('/shop_user/change_invalid', 'App\Http\Controllers\Api\ShopUserController@changeInvalid');
 
 /**
  * メール関連
  */
 // Emailテンプレート取得
-Route::get('/email_templates/{userType}', 'App\Http\Controllers\Api\EmailTemplateController@index')->name('email_template.index');
-
-// Email送信(管理者用)
-Route::post('/admin/send_email', 'App\Http\Controllers\Api\SendEmailController@adminStore')->name('send_email.admin_store');
+Route::get('/email_templates/{userType}', 'App\Http\Controllers\Api\EmailTemplateController@index');
 
 // Email送信(店舗代表者用)
-Route::post('/agent/send_email', 'App\Http\Controllers\Api\SendEmailController@agentStore')->name('send_email.agent_store');
+Route::post('/agent/send_email', 'App\Http\Controllers\Api\SendEmailController@agentStore');
+
+// Email送信(管理者用)
+Route::post('/admin/send_email', 'App\Http\Controllers\Api\SendEmailController@adminStore');
