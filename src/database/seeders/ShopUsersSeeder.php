@@ -18,7 +18,7 @@ class ShopUsersSeeder extends Seeder
             [
                 'name' => 'agent1',
                 'shop_id' => 1,
-                'email' => 'agent1@aa.aa',
+                'email' => 'agent1@mail.com',
                 'password' => bcrypt('hogehoge'),
                 'invalid_flag' => 1,
                 'created_at' => now(),
@@ -27,7 +27,7 @@ class ShopUsersSeeder extends Seeder
             [
                 'name' => 'agent2',
                 'shop_id' => 2,
-                'email' => 'agent2@aa.aa',
+                'email' => 'agent2@mail.com',
                 'password' => bcrypt('hogehoge'),
                 'invalid_flag' => 0,
                 'created_at' => now(),
@@ -36,7 +36,7 @@ class ShopUsersSeeder extends Seeder
             [
                 'name' => 'agent3',
                 'shop_id' => NULL,
-                'email' => 'agent3@aa.aa',
+                'email' => 'agent3@mail.com',
                 'password' => bcrypt('hogehoge'),
                 'invalid_flag' => 0,
                 'created_at' => now(),
@@ -44,19 +44,19 @@ class ShopUsersSeeder extends Seeder
             ],
             [
                 'name' => 'agent4',
-                'shop_id' => 4,
-                'email' => 'agent4@aa.aa',
+                'shop_id' => NULL,
+                'email' => 'agent4@mail.com',
                 'password' => bcrypt('hogehoge'),
-                'invalid_flag' => 1,
+                'invalid_flag' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'agent5',
-                'shop_id' => 5,
-                'email' => 'agent5@aa.aa',
+                'shop_id' => NULL,
+                'email' => 'agent5@mail.com',
                 'password' => bcrypt('hogehoge'),
-                'invalid_flag' => 0,
+                'invalid_flag' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
