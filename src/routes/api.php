@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// ユーザー登録
+Route::post('/register/user', 'App\Http\Controllers\Api\AuthUserController@register');
+
+// Route::middleware('auth:user')->group(function () {
 /**
  * 店舗
  */
@@ -114,3 +119,4 @@ Route::post('/agent/send_email', 'App\Http\Controllers\Api\SendEmailController@a
 
 // Email送信(管理者用)
 Route::post('/admin/send_email', 'App\Http\Controllers\Api\SendEmailController@adminStore');
+// });

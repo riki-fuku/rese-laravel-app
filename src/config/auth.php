@@ -43,10 +43,19 @@ return [
         'api' => [
             'driver' => 'sanctum',
             'provider' => 'users',
+            'hash' => false,
         ],
         'user' => [ // ユーザー用ガード
             'driver' => 'sanctum',
             'provider' => 'users',
+        ],
+        'agent' => [ // 店舗代表者用ガード
+            'driver' => 'sanctum',
+            'provider' => 'agents',
+        ],
+        'admin' => [ // 管理者用ガード
+            'driver' => 'sanctum',
+            'provider' => 'admins',
         ],
     ],
 
@@ -72,6 +81,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\ShopUser::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class,
+        ],
     ],
 
     /*
@@ -94,6 +111,18 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+            'throttle' => 60,
+        ],
+        'agents' => [
+            'provider' => 'agents',
+            'table' => 'password_resets',
+            'expire' => 15,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
             'throttle' => 60,
         ],
     ],
