@@ -15,9 +15,9 @@ class ShopController extends Controller
         return response()->json($shops);
     }
 
-    public function show($id)
+    public function show($shopId)
     {
-        $shop = Shop::with('genre', 'area', 'favorite')->find($id);
+        $shop = Shop::with('genre', 'area', 'favorite')->find($shopId);
         return response()->json($shop);
     }
 
@@ -27,13 +27,22 @@ class ShopController extends Controller
         $userId = 1;
 
         $shop = new Shop();
+        $shopId = $shop->id;
         $shop->name = $request->name;
         $shop->genre_id = $request->genre_id;
         $shop->area_id = $request->area_id;
         $shop->description = $request->description;
         $shop->opening_time = $request->opening_time;
         $shop->closing_time = $request->closing_time;
-        $shop->image_url = 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg';
+
+        // 画像をS3にアップロードする
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 's3');
+            $imageUrl = \Storage::disk('s3')->url($imagePath);
+            $shop->image_url = $imageUrl;
+        }
+
         $shop->save();
 
         // 作成したshopのidを取得する
@@ -63,7 +72,15 @@ class ShopController extends Controller
         $shop->description = $request->description;
         $shop->opening_time = $request->opening_time;
         $shop->closing_time = $request->closing_time;
-        $shop->image_url = 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg';
+
+        // 画像をS3にアップロードする
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 's3');
+            $imageUrl = \Storage::disk('s3')->url($imagePath);
+            $shop->image_url = $imageUrl;
+        }
+
         $shop->save();
 
         return response()->json($shop);
