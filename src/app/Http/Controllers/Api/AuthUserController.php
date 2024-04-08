@@ -69,14 +69,16 @@ class AuthUserController extends Controller
         ]);
 
         try {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'invalid_flag' => 1
-            ]);
+            // ユーザー登録
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->invalid_flag = 1;
 
-            // 確認用メール送信処理を記述
+            $user->save();
+
+            // ユーザー確認用メール送信処理
             Mail::to($user->email)->send(new SendVerifyEmail($user));
 
             return response()->json([

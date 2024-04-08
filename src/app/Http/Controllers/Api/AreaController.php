@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Area;
 
 class AreaController extends Controller
 {
+    /**
+     * エリア一覧取得
+     */
     public function index()
     {
         $areas = Area::all();

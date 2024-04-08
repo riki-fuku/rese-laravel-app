@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailTemplate;
-use Illuminate\Http\Request;
 
 class EmailTemplateController extends Controller
 {
+    /**
+     * ユーザータイプによるメールテンプレート一覧取得
+     */
     public function index($userType)
     {
         $emailTemplateList = EmailTemplate::where('user_type', $userType)->get();

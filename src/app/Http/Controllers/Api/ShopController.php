@@ -9,18 +9,27 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    /**
+     * 店舗一覧取得
+     */
     public function index()
     {
         $shops = Shop::with('genre', 'area', 'favorite')->get();
         return response()->json($shops);
     }
 
+    /**
+     * 店舗詳細取得
+     */
     public function show($shopId)
     {
         $shop = Shop::with('genre', 'area', 'favorite')->find($shopId);
         return response()->json($shop);
     }
 
+    /**
+     * 店舗登録
+     */
     public function store(Request $request)
     {
         // user_idは仮で1を入れる
@@ -56,6 +65,9 @@ class ShopController extends Controller
         return response()->json($shop);
     }
 
+    /**
+     * 店舗更新
+     */
     public function update(Request $request)
     {
         \Log::info($request);

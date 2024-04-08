@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthAdminController extends Controller
 {
     /**
-     * ログイン
+     * 管理者ログイン
      */
     public function login(Request $request)
     {
@@ -34,7 +34,7 @@ class AuthAdminController extends Controller
     }
 
     /**
-     * ログアウト
+     * 管理者ログアウト
      */
     public function logout(Request $request)
     {

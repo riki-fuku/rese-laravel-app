@@ -15,8 +15,8 @@ class FavoriteController extends Controller
     {
         // お気に入り一覧取得
         $favorites = Favorite::with(['shop' => function ($query) {
-                $query->with('area', 'genre');
-            }])
+            $query->with('area', 'genre');
+        }])
             ->where('user_id', $userId)
             ->get();
 
@@ -26,7 +26,7 @@ class FavoriteController extends Controller
 
 
     /**
-     * お気に入り登録(axios)
+     * お気に入り登録
      * 登録済みの場合は削除、未登録の場合は登録
      */
     public function store(Request $request)

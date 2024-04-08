@@ -11,6 +11,9 @@ use Mail;
 
 class SendEmailController extends Controller
 {
+    /**
+     * 管理者用メール送信
+     */
     public function adminStore(Request $request)
     {
         // 全一般ユーザー取得
@@ -35,6 +38,9 @@ class SendEmailController extends Controller
         return response()->json(['message' => 'メールを送信しました'], 200);
     }
 
+    /**
+     * 店舗代表者用メール送信
+     */
     public function agentStore(Request $request)
     {
         // 全一般ユーザー取得

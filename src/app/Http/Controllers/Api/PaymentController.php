@@ -10,6 +10,9 @@ use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
+    /**
+     * 決済処理
+     */
     public function charge(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));

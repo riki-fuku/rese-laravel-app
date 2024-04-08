@@ -9,18 +9,27 @@ use Illuminate\Http\Request;
 
 class ShopUserController extends Controller
 {
+    /**
+     * 店舗代表者一覧取得
+     */
     public function index()
     {
         $shopUsers = ShopUser::with('shop')->get();
         return response()->json($shopUsers);
     }
 
+    /**
+     * 店舗代表者詳細取得
+     */
     public function show($id)
     {
         $shopUser = ShopUser::find($id);
         return response()->json($shopUser);
     }
 
+    /**
+     * 店舗代表者登録
+     */
     public function store(Request $request)
     {
         // メールアドレスのユニークチェック
@@ -50,6 +59,9 @@ class ShopUserController extends Controller
         return response()->json($shopUser);
     }
 
+    /**
+     * 店舗代表者更新
+     */
     public function update(Request $request)
     {
         // メールアドレスのユニークチェック
@@ -83,6 +95,9 @@ class ShopUserController extends Controller
         return response()->json($shopUser, 200);
     }
 
+    /**
+     * 店舗代表者のログインの有効・無効を切り替える
+     */
     public function changeInvalid(Request $request)
     {
         $shopUser = ShopUser::find($request->id);
@@ -96,6 +111,9 @@ class ShopUserController extends Controller
         return response()->json($shopUser);
     }
 
+    /**
+     * 店舗代表者と店舗の紐付け取得
+     */
     public function showShop()
     {
         // ログイン中の店舗代表者のIDを取得
@@ -109,6 +127,9 @@ class ShopUserController extends Controller
         return response()->json($shopUser->shop);
     }
 
+    /**
+     * 店舗代表者の予約一覧取得
+     */
     public function showReservations()
     {
         // ログイン中の店舗代表者のIDを取得

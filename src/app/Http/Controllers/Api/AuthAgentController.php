@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthAgentController extends Controller
 {
     /**
-     * ログイン
+     * 店舗代表者ログイン
      */
     public function login(Request $request)
     {
@@ -34,7 +34,7 @@ class AuthAgentController extends Controller
     }
 
     /**
-     * ログアウト
+     * 店舗代表者ログアウト
      */
     public function logout(Request $request)
     {
