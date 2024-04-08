@@ -20,6 +20,8 @@ class AdminUsersSeeder extends Seeder
                 'email' => 'admin1@mail.com',
                 'password' => bcrypt('hogehoge'),
                 'invalid_flag' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }
