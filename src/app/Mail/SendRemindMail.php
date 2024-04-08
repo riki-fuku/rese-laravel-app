@@ -46,6 +46,6 @@ class SendRemindMail extends Mailable
                 'reservationDate' => $this->reservationDate,
                 'shopName' => $this->shopName,
                 'partySize' => $this->partySize,
-            ]);;
+            ]);
     }
 }

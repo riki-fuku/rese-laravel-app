@@ -1,7 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthUserController;
+use App\Http\Controllers\Api\ShopController;
+use App\Http\Controllers\Api\GenreController;
+use App\Http\Controllers\Api\AreaController;
+use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\ShopUserController;
+use App\Http\Controllers\Api\EmailTemplateController;
+use App\Http\Controllers\Api\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +25,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ユーザー登録
-Route::post('/register/user', 'App\Http\Controllers\Api\AuthUserController@register');
+Route::post('/register/user', [AuthUserController::class, 'register']);
 
-// Route::middleware('auth:user')->group(function () {
 /**
  * 店舗
  */
 // 店舗一覧取得
-Route::get('/shops', 'App\Http\Controllers\Api\ShopController@index');
+Route::get('/shops', [ShopController::class, 'index']);
 
 // 店舗詳細取得
-Route::get('/shops/{shopId}', 'App\Http\Controllers\Api\ShopController@show');
+Route::get('/shops/{shopId}', [ShopController::class, 'show']);
 
 // 店舗登録
 Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store');
@@ -37,86 +46,85 @@ Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update');
  * ジャンル
  */
 // ジャンル一覧取得
-Route::get('/genres', 'App\Http\Controllers\Api\GenreController@index');
+Route::get('/genres', [GenreController::class, 'index']);
 
 /**
  * エリア
  */
 // エリア一覧取得
-Route::get('/areas', 'App\Http\Controllers\Api\AreaController@index');
+Route::get('/areas', [AreaController::class, 'index']);
 
 /**
  * お気に入り
  */
 // お気に入り一覧取得
-Route::get('/favorites/{userId}', 'App\Http\Controllers\Api\FavoriteController@index');
+Route::get('/favorites/{userId}', [FavoriteController::class, 'index']);
 
 // お気に入り登録
-Route::post('/favorite', 'App\Http\Controllers\Api\FavoriteController@store');
+Route::post('/favorite', [FavoriteController::class, 'store']);
 
 /**
  * 予約
  */
 // 予約一覧取得
-Route::get('/reservations/{userId}', 'App\Http\Controllers\Api\ReservationController@index');
+Route::get('/reservations/{userId}', [ReservationController::class, 'index']);
 
 // 予約登録
-Route::post('/reservation', 'App\Http\Controllers\Api\ReservationController@store');
+Route::post('/reservation', [ReservationController::class, 'store']);
 
 // 予約詳細取得
-Route::get('/reservation/{reservationId}', 'App\Http\Controllers\Api\ReservationController@show');
+Route::get('/reservation/{reservationId}', [ReservationController::class, 'show']);
 
 // 予約更新
-Route::put('/reservation', 'App\Http\Controllers\Api\ReservationController@update');
+Route::put('/reservation', [ReservationController::class, 'update']);
 
 // 予約キャンセル
-Route::delete('/reservation/cancel/{id}', 'App\Http\Controllers\Api\ReservationController@cancel');
+Route::delete('/reservation/cancel/{id}', [ReservationController::class, 'cancel']);
 
 // 予約ステータスを来店済に更新
-Route::post('/reservation/visited', 'App\Http\Controllers\Api\ReservationController@visited');
+Route::post('/reservation/visited', [ReservationController::class, 'visited']);
 
 /**
  * 店舗評価
  */
 // 店舗評価送信
-Route::post('/rating', 'App\Http\Controllers\Api\RatingController@store');
+Route::post('/rating', [RatingController::class, 'store']);
 
 /**
  * 決済
  */
 // 決済実行
-Route::post('/payment', 'App\Http\Controllers\Api\PaymentController@charge');
+Route::post('/payment', [PaymentController::class, 'store']);
 
 /**
  * 店舗代表者
  */
 // 店舗代表者一覧取得
-Route::get('/shop_users', 'App\Http\Controllers\Api\ShopUserController@index');
+Route::get('/shop_users', [ShopUserController::class, 'index']);
 
 // 店舗代表者に紐づく店舗取得
-Route::get('/shop_user/show/shop', 'App\Http\Controllers\Api\ShopUserController@showShop');
+Route::get('/shop_user/show/shop', [ShopUserController::class, 'showShop']);
 
 // 店舗代表者に紐づく予約一覧取得
-Route::get('/shop_user/show/reservations', 'App\Http\Controllers\Api\ShopUserController@showReservations');
+Route::get('/shop_user/show/reservations', [ShopUserController::class, 'showReservations']);
 
 // 店舗代表者作成
-Route::post('/shop_user/store', 'App\Http\Controllers\Api\ShopUserController@store');
+Route::post('/shop_user/store', [ShopUserController::class, 'store']);
 
 // 店舗代表者更新
-Route::put('/shop_user/update', 'App\Http\Controllers\Api\ShopUserController@update');
+Route::put('/shop_user/update', [ShopUserController::class, 'update']);
 
 // 店舗代表者有効/無効切り替え
-Route::post('/shop_user/change_invalid', 'App\Http\Controllers\Api\ShopUserController@changeInvalid');
+Route::post('/shop_user/change_invalid', [ShopUserController::class, 'changeInvalid']);
 
 /**
  * メール関連
  */
 // Emailテンプレート取得
-Route::get('/email_templates/{userType}', 'App\Http\Controllers\Api\EmailTemplateController@index');
+Route::get('/email_templates/{userType}', [EmailTemplateController::class, 'index']);
 
 // Email送信(店舗代表者用)
-Route::post('/agent/send_email', 'App\Http\Controllers\Api\SendEmailController@agentStore');
+Route::post('/agent/send_email', [SendEmailController::class, 'agentStore']);
 
 // Email送信(管理者用)
-Route::post('/admin/send_email', 'App\Http\Controllers\Api\SendEmailController@adminStore');
-// });
+Route::post('/admin/send_email', [SendEmailController::class, 'adminStore']);

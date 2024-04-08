@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\SendVerifyEmail;
+use Mail;
 
 class AuthUserController extends Controller
 {
@@ -18,7 +20,15 @@ class AuthUserController extends Controller
 
         $user = auth()->guard('user')->getProvider()->retrieveByCredentials($credentials);
 
-        if ($user && auth()->guard('user')->getProvider()->validateCredentials($user, $credentials)) {
+        if ($user  && auth()->guard('user')->getProvider()->validateCredentials($user, $credentials)) {
+
+            // メール認証が完了していない場合ログインできないようにする
+            if ($user->email_verified_at === null) {
+                return response()->json([
+                    'message' => 'メール認証が完了していません'
+                ], 401);
+            }
+
             $request->session()->regenerate();
 
             $token = $user->createToken('authToken')->plainTextToken;
@@ -66,12 +76,11 @@ class AuthUserController extends Controller
                 'invalid_flag' => 1
             ]);
 
-            $token = $user->createToken('authToken')->plainTextToken;
+            // 確認用メール送信処理を記述
+            Mail::to($user->email)->send(new SendVerifyEmail($user));
 
             return response()->json([
                 'message' => 'ユーザー登録が完了しました',
-                'user' => $user,
-                'token' => $token
             ]);
         } catch (\Exception $e) {
             return response()->json([

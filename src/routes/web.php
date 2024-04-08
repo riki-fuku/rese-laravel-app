@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthUserController;
+use App\Http\Controllers\Api\AuthAgentController;
+use App\Http\Controllers\Api\AuthAdminController;
+use App\Http\Controllers\Auth\UserVerifyEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +26,16 @@ Route::get('/sanctum/csrf-cookie', function () {
 });
 
 // ユーザーログイン・ログアウト
-Route::post('/login', 'App\Http\Controllers\Api\AuthUserController@login');
-Route::post('/logout', 'App\Http\Controllers\Api\AuthUserController@logout')->middleware('auth:user');
+Route::post('/login', [AuthUserController::class, 'login']);
+Route::post('/logout', [AuthUserController::class, 'logout'])->middleware('auth:user');
 
 // 店舗代表者ログイン・ログアウト
-Route::post('/agent/login', 'App\Http\Controllers\Api\AuthAgentController@login');
-Route::post('/agent/logout', 'App\Http\Controllers\Api\AuthAgentController@logout')->middleware('auth:agent');
+Route::post('/agent/login', [AuthAgentController::class, 'login']);
+Route::post('/agent/logout', [AuthAgentController::class, 'logout'])->middleware('auth:agent');
 
 // 管理者ログイン・ログアウト
-Route::post('/admin/login', 'App\Http\Controllers\Api\AuthAdminController@login');
-Route::post('/admin/logout', 'App\Http\Controllers\Api\AuthAdminController@logout')->middleware('auth:admin');
+Route::post('/admin/login', [AuthAdminController::class, 'login']);
+Route::post('/admin/logout', [AuthAdminController::class, 'logout'])->middleware('auth:admin');
+
+// ユーザーメール認証
+Route::get('/auth/verify-email/{name}/{email}', [UserVerifyEmailController::class, 'verifyEmail']);
