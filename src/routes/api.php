@@ -31,13 +31,14 @@ Route::post('/register/user', [AuthUserController::class, 'register']);
  * 店舗
  */
 // 店舗一覧取得
-Route::get('/shops', [ShopController::class, 'index']);
+Route::get('/shops', [ShopController::class, 'index'])->middleware('auth:user');
+
 
 // 店舗詳細取得
 Route::get('/shops/{shopId}', [ShopController::class, 'show']);
 
 // 店舗登録
-Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store');
+Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store')->middleware('auth:agent');
 
 // 店舗更新
 Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update');
@@ -94,7 +95,7 @@ Route::post('/rating', [RatingController::class, 'store']);
  * 決済
  */
 // 決済実行
-Route::post('/payment', [PaymentController::class, 'store']);
+Route::post('/payment', [PaymentController::class, 'charge']);
 
 /**
  * 店舗代表者
@@ -103,10 +104,10 @@ Route::post('/payment', [PaymentController::class, 'store']);
 Route::get('/shop_users', [ShopUserController::class, 'index']);
 
 // 店舗代表者に紐づく店舗取得
-Route::get('/shop_user/show/shop', [ShopUserController::class, 'showShop']);
+Route::get('/shop_user/show/shop', [ShopUserController::class, 'showShop'])->middleware('auth:agent');
 
 // 店舗代表者に紐づく予約一覧取得
-Route::get('/shop_user/show/reservations', [ShopUserController::class, 'showReservations']);
+Route::get('/shop_user/show/reservations', [ShopUserController::class, 'showReservations'])->middleware('auth:agent');
 
 // 店舗代表者作成
 Route::post('/shop_user/store', [ShopUserController::class, 'store']);

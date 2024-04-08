@@ -17,7 +17,6 @@ class AuthAdminController extends Controller
         $user = auth()->guard('admin')->getProvider()->retrieveByCredentials($credentials);
 
         if ($user && auth()->guard('admin')->getProvider()->validateCredentials($user, $credentials)) {
-            $request->session()->regenerate();
 
             $token = $user->createToken('authToken')->plainTextToken;
 
@@ -34,7 +33,7 @@ class AuthAdminController extends Controller
     }
 
     /**
-     * 管理者ログアウト
+     * ログアウト
      */
     public function logout(Request $request)
     {

@@ -17,7 +17,6 @@ class AuthAgentController extends Controller
         $user = auth()->guard('agent')->getProvider()->retrieveByCredentials($credentials);
 
         if ($user && auth()->guard('agent')->getProvider()->validateCredentials($user, $credentials)) {
-            $request->session()->regenerate();
 
             $token = $user->createToken('authToken')->plainTextToken;
 

@@ -14,7 +14,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $shops = Shop::with('genre', 'area', 'favorite')->get();
+        $userId = auth()->id();
+        $shops = Shop::with(['area', 'genre', 'favorite' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->get();
         return response()->json($shops);
     }
 
@@ -32,8 +35,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        // user_idは仮で1を入れる
-        $userId = 1;
+        $userId = auth()->id();
 
         $shop = new Shop();
         $shopId = $shop->id;

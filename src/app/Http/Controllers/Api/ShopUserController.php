@@ -75,15 +75,6 @@ class ShopUserController extends Controller
 
         // 店舗代表者更新
         $shopUser = ShopUser::find($request->id);
-        // if ($request->shop_id) {
-        //     // すでに登録されている店舗に新しい店舗代表者を登録する場合を想定
-        //     // 更新の場合は別の店舗に変更することも想定
-        //     $shopUser->shop_id = $request->shop_id;
-        // } else {
-        //     // 店舗IDがない場合はnullをセット
-        //     // 初回登録してから店舗作成になるため
-        //     $shopUser->shop_id = null;
-        // }
         $shopUser->name = $request->name;
         $shopUser->email = $request->email;
         if ($request->password) {
@@ -117,7 +108,7 @@ class ShopUserController extends Controller
     public function showShop()
     {
         // ログイン中の店舗代表者のIDを取得
-        $shopUserid = 1;
+        $shopUserid = auth()->id();
 
         $shopUser = ShopUser::with(['shop' => function ($query) {
             $query->with('area', 'genre');
@@ -133,7 +124,7 @@ class ShopUserController extends Controller
     public function showReservations()
     {
         // ログイン中の店舗代表者のIDを取得
-        $shopUserid = 1;
+        $shopUserid = auth()->id();
 
         $shopUser = ShopUser::with(['shop' => function ($query) {
             $query->with(['reservations' => function ($query) {

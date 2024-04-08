@@ -20,7 +20,7 @@ class PaymentController extends Controller
         // 予約情報を取得
         $reservation = Reservation::where('status', Reservation::VISITED) // 来店中のみ決済可能
             ->where('shop_id', $request->shop_id)
-            ->where('user_id', 1) // TODO: ログイン機能実装後に修正
+            ->where('user_id', $request->user_id)
             ->first();
 
         if (!$reservation) {
@@ -29,6 +29,7 @@ class PaymentController extends Controller
             ], 404);
         }
 
+        // 決済情報を登録
         $payment = new Payment();
         $payment->reservation_id = $reservation->id;
         $payment->payment_date = now();
@@ -36,10 +37,15 @@ class PaymentController extends Controller
         $payment->payment_method = Payment::CREDIT;
         $payment->payment_status = Payment::PAID;
 
+        // 予約情報を更新
+        $reservation->status = Reservation::PAYMENT_COMPLETED;
 
         try {
             // 決済情報を登録
             $payment->save();
+
+            // 予約情報を更新
+            $reservation->save();
 
             // 決済処理
             $charge = \Stripe\Charge::create([
