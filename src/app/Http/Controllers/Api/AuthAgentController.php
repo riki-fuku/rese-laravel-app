@@ -16,6 +16,13 @@ class AuthAgentController extends Controller
 
         $user = auth()->guard('agent')->getProvider()->retrieveByCredentials($credentials);
 
+        // invalid_flagが0の場合はログインできない
+        if ($user && $user->invalid_flag === 0) {
+            return response()->json([
+                'message' => 'ログインに失敗しました。メールアドレスまたはパスワードが間違っています。'
+            ], 401);
+        }
+
         if ($user && auth()->guard('agent')->getProvider()->validateCredentials($user, $credentials)) {
 
             $token = $user->createToken('authToken')->plainTextToken;
