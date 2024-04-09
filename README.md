@@ -41,7 +41,7 @@ Rese
 
 #### 本番環境(一般ユーザー)
 
-https://d2aqnqqkh4vm3z.cloudfront.net/
+http://rese-vue-app.s3-website-ap-northeast-1.amazonaws.com
 
 | ユーザー名 | メールアドレス | パスワード |
 | ---------- | -------------- | ---------- |
@@ -49,7 +49,7 @@ https://d2aqnqqkh4vm3z.cloudfront.net/
 
 #### 本番環境(一般ユーザー)
 
-https://d2aqnqqkh4vm3z.cloudfront.net/agent/
+http://rese-vue-app.s3-website-ap-northeast-1.amazonaws.com/agent/
 
 | ユーザー名 | メールアドレス  | パスワード |
 | ---------- | --------------- | ---------- |
@@ -57,7 +57,7 @@ https://d2aqnqqkh4vm3z.cloudfront.net/agent/
 
 #### 本番環境(一般ユーザー)
 
-https://d2aqnqqkh4vm3z.cloudfront.net/admin/
+http://rese-vue-app.s3-website-ap-northeast-1.amazonaws.com/admin/
 
 | ユーザー名 | メールアドレス  | パスワード |
 | ---------- | --------------- | ---------- |
