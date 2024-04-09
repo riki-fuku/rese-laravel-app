@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\SendVerifyEmail;
 use Mail;
+use App\Http\Requests\LoginRequest;
 
 class AuthUserController extends Controller
 {
     /**
      * ログイン
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 

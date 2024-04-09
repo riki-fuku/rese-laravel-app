@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -63,7 +64,7 @@ class ReservationController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         $reservation = new Reservation();
         $reservation->shop_id = $request->shop_id;
