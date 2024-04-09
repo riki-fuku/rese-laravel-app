@@ -64,7 +64,10 @@ http://rese-vue-app.s3-website-ap-northeast-1.amazonaws.com/admin/
 | admin1     | admin1@mail.com | hogehoge   |
 
 #### 本番環境(メール:MailHog)
-http://54.157.248.27:8025/
+http://3.87.3.52:8025/
+
+#### 本番環境(DB)
+http://3.87.3.52:8080/
 
 ## 機能一覧
 
