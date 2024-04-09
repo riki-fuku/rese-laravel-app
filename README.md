@@ -63,6 +63,9 @@ https://d2aqnqqkh4vm3z.cloudfront.net/admin/
 | ---------- | --------------- | ---------- |
 | admin1     | admin1@mail.com | hogehoge   |
 
+#### 本番環境(メール:MailHog)
+http://54.157.248.27:8025/
+
 ## 機能一覧
 
 ##### 一般ユーザー
