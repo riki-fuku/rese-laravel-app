@@ -25,6 +25,46 @@ class UsersSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'id' => 2,
+                'name' => 'user2',
+                'email' => 'user2@mail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('hogehoge'),
+                'invalid_flag' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 3,
+                'name' => 'user3',
+                'email' => 'user3@mail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('hogehoge'),
+                'invalid_flag' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 4,
+                'name' => 'user4',
+                'email' => 'user4@mail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('hogehoge'),
+                'invalid_flag' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 5,
+                'name' => 'user5',
+                'email' => 'user5@mail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('hogehoge'),
+                'invalid_flag' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }
