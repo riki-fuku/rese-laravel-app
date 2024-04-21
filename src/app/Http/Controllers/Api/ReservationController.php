@@ -18,6 +18,7 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::with(['shop'])
             ->where('user_id', $userId)
+            ->where('status', '!=', Reservation::PAYMENT_COMPLETED) // 決済完了は含めない(評価を他画面に移動したため表示しない)
             ->where('status', '!=', Reservation::EVALUATED) // 評価済は含めない
             ->where('status', '!=', Reservation::CANCELED) // キャンセルは含めない
             ->orderBy('status', 'asc')

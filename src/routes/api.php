@@ -93,8 +93,14 @@ Route::post('/reservation/visited', [ReservationController::class, 'visited']);
 // 店舗評価一覧取得
 Route::get('/ratings/{shopId}', [RatingController::class, 'index']);
 
+// ユーザー評価取得
+Route::get('/ratings/user/{userId}/{shopId}', [RatingController::class, 'indexByUser']);
+
 // 店舗評価送信
 Route::post('/rating', [RatingController::class, 'store']);
+
+// 店舗評価削除
+Route::delete('/rating/{id}', [RatingController::class, 'destroy']);
 
 /**
  * 決済
