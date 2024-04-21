@@ -10,14 +10,24 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     /**
-     * 店舗一覧取得
+     * 店舗一覧取得(ログイン中のユーザーのお気に入りも取得)
      */
     public function index()
     {
         $userId = auth()->id();
-        $shops = Shop::with(['area', 'genre', 'favorite' => function ($query) use ($userId) {
+        $shops = Shop::with(['area', 'genre', 'ratings', 'favorite' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
         }])->get();
+        return response()->json($shops);
+    }
+
+    /**
+     * 店舗一覧取得(口コミ情報も取得)
+     */
+    public function indexRatings()
+    {
+        $shops = Shop::with('area', 'genre', 'ratings')->get();
+        \Log::info($shops);
         return response()->json($shops);
     }
 

@@ -10,6 +10,23 @@ use Illuminate\Http\Request;
 class RatingController extends Controller
 {
     /**
+     * 店舗評価一覧取得(店舗ID指定)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($shopId)
+    {
+        // 店舗IDが指定されていない場合はエラーを返す
+        if (!$shopId) {
+            return response()->json(['message' => 'Shop ID not found'], 404);
+        }
+
+        $ratings = Rating::where('shop_id', $shopId)->get();
+
+        return response()->json($ratings);
+    }
+
+    /**
      * 店舗評価送信
      *
      * @return \Illuminate\Http\Response

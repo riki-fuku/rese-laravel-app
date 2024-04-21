@@ -48,4 +48,9 @@ class Shop extends Model
     {
         return $this->hasMany('App\Models\Reservation');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
 }

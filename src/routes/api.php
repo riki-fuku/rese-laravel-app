@@ -30,9 +30,11 @@ Route::post('/register/user', [AuthUserController::class, 'register']);
 /**
  * 店舗
  */
-// 店舗一覧取得
+// 店舗一覧取得(ログイン中のユーザーのお気に入りも取得)
 Route::get('/shops', [ShopController::class, 'index'])->middleware('auth:user');
 
+// 店舗一覧取得(口コミ情報も取得)
+Route::get('/shops/ratings', [ShopController::class, 'indexRatings']);
 
 // 店舗詳細取得
 Route::get('/shops/{shopId}', [ShopController::class, 'show']);
@@ -88,6 +90,9 @@ Route::post('/reservation/visited', [ReservationController::class, 'visited']);
 /**
  * 店舗評価
  */
+// 店舗評価一覧取得
+Route::get('/ratings/{shopId}', [RatingController::class, 'index']);
+
 // 店舗評価送信
 Route::post('/rating', [RatingController::class, 'store']);
 
