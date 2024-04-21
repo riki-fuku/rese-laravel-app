@@ -72,14 +72,6 @@ class RatingSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'user_id' => 5,
-                'shop_id' => 2,
-                'rating' => 2,
-                'comment' => 'まずかったです。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'user_id' => 2,
                 'shop_id' => 3,
                 'rating' => 1,
@@ -96,22 +88,6 @@ class RatingSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'user_id' => 4,
-                'shop_id' => 3,
-                'rating' => 4,
-                'comment' => '美味しかったです。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 5,
-                'shop_id' => 3,
-                'rating' => 3,
-                'comment' => '普通でした。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'user_id' => 2,
                 'shop_id' => 4,
                 'rating' => 2,
@@ -119,30 +95,6 @@ class RatingSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            [
-                'user_id' => 3,
-                'shop_id' => 4,
-                'rating' => 1,
-                'comment' => '最悪でした。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 4,
-                'shop_id' => 4,
-                'rating' => 5,
-                'comment' => '最高でした。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 5,
-                'shop_id' => 4,
-                'rating' => 4,
-                'comment' => '美味しかったです。',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
         ]);
     }
 }
