@@ -27,7 +27,6 @@ class ShopController extends Controller
     public function indexRatings()
     {
         $shops = Shop::with('area', 'genre', 'ratings')->get();
-        \Log::info($shops);
         return response()->json($shops);
     }
 
