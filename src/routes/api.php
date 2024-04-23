@@ -42,6 +42,9 @@ Route::get('/shops/{shopId}', [ShopController::class, 'show']);
 // 店舗登録
 Route::post('/shop/store', 'App\Http\Controllers\Api\ShopController@store')->middleware('auth:agent');
 
+// 店舗一覧登録(CSVアップロード)
+Route::post('/shops/store/csv', 'App\Http\Controllers\Api\ShopController@storeCsv')->middleware('auth:admin');
+
 // 店舗更新
 Route::post('/shop/update', 'App\Http\Controllers\Api\ShopController@update');
 
