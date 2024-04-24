@@ -197,3 +197,5 @@ API を実行したい際は Postman 等のツールを利用してください�
 ## 参考
 
 [福島さん Web 開発上級 生徒様用案件シート Ver.2.0](https://docs.google.com/spreadsheets/d/1IF4y5eBm6zgM_64wsPAc_UwLsdiPoZTR2HceWD0icgg/edit#gid=935968078)
+
+[追加実装](https://estra-inc.notion.site/Pro-c4ce694783044672a7acda0fc2483969)
