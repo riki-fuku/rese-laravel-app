@@ -9,6 +9,7 @@ class AreaController extends Controller
 {
     /**
      * エリア一覧取得
+     * 福島コメント
      */
     public function index()
     {
